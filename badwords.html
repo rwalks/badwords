@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="badwords.css" />
+<head>
+  <title>BADWORDS</title>
+  <script src="javascript/jquery-1.4.2.min.js" type="text/javascript"></script>
+  <script src="javascript/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></script>
+</head>
+<script>
+  load_frames = function(type){
+    var f = new Framer(type);
+    f.run(0);
+  }
+
+  Framer = function(type){
+    var urls = {
+      'dog':["http://en.wikipedia.org/wiki/Postman_Pat#mediaviewer/File:Postman-Pat.jpg","http://meatassociation.com/","http://petsmart.com","http://sfrecpark.org/parks-open-spaces/dog-play-areas-program/","http://chewy.com","http://dogtoys.com","http://omahasteaks.com"],
+      'weirdo':["http://home.nra.org/","http://www.smith-wesson.com","http://www.paul.senate.gov/","http://ronpaulinstitute.org/","http://www.oscaroparts.com/","http://www.autopartswarehouse.com/","http://www.audleytravel.com/us/destinations/southeast-asia/thailand.aspx","http://www.ultimate.travel/ultimate-thailand/","http://asia.tripmasters.com/Thailand_Vacations.aspx","https://www.aynrand.org/","http://www.amazon.com/Atlas-Shrugged-Ayn-Rand/dp/0451191145","http://www.atlasshruggedmovie.com/","http://www.cpr-savers.com/Complete-KERi-Manikin_p_5658.html?gclid=Cj0KEQjwh96hBRCnsefbvZrKrpcBEiQAF7oMdMNjALbXae210e7yLMGTKFw2BIg8yFyv7aVJqkR0BpEaAkfC8P8HAQ","http://www.aedsuperstore.com/life-form-basic-keri-nursing-skills-manikin.html","http://www.aedsuperstore.com/life-form-manikin-fat-old-fred-black.html","http://www.anatomywarehouse.com/basic-geri-manikin-without-carry-case-a-101675?","http://www.anatomywarehouse.com/advanced-geri-manikin-a-101674?","https://www.fleshlight.com/","https://www.fleshlight.com/fleshlight-girls/fleshlight-toys/#products","https://www.fleshlight.com/fleshlight-girls/fleshlight-toys/asa-akira/","http://www.classmates.com/","https://www.nsa.gov/","https://www.cia.gov/","http://www.theblaze.com/","http://www.drudge.com/","http://www.zazzle.com/funny+conservative+tshirts","http://www.roadkilltshirts.com/","http://www.badideatshirts.com/","http://www.thoseshirts.com/","http://www.spencersonline.com/apparel_hats_trucker-hats/","http://www.trucknutz.com/","http://www.topmaleenhancements.com/","http://www.topmaleenhancements.com/","http://www.proactiv.com/","http://www.xout.com/","http://www.aczone.com/"],
+      'zuck':["http://store.americanapparel.net/tri-blend-hoodie_trt497","http://store.americanapparel.net/dov-s-hoodie_rsafs400","http://store.americanapparel.net/salt-and-pepper-zip-hoodie_mt497","http://store.americanapparel.net/california-fleece-zip-hoodie_5497","http://store.americanapparel.net/nantucket-fleece-zip-hoodie_rsanf400","http://www.sportsmansguide.com/product/index/scent-shield-by-scentblocker-human-scent-eliminator-1-gallon?a=351062","http://www.sportsmansguide.com/product/index/ozonics-hr-200-pro-blind-tree-stand-scent-control-unit?a=1742739","http://www.sportsmansguide.com/product/index/ozonics-hr-200-blind-tree-stand-scent-control-unit?a=1500799","http://www.sportsmansguide.com/product/index/guide-gear-deer-cart?a=351879","http://www.sportsmansguide.com/product/index/guide-gear-cast-iron-meat-tenderizer?a=1332992","http://www.sportsmansguide.com/product/index/guide-gear-portable-game-hanger?a=1502172","http://home.nra.org/","http://www.smith-wesson.com","http://www.paul.senate.gov/","http://ronpaulinstitute.org/","https://www.aynrand.org/","http://www.amazon.com/Atlas-Shrugged-Ayn-Rand/dp/0451191145","http://www.atlasshruggedmovie.com/","http://www.topmaleenhancements.com/","http://www.proactiv.com/","http://www.xout.com/","http://www.aczone.com/"]
+    };
+    var frames_per = 100;
+    var count = urls[type].length * frames_per;
+    var index = 0;
+    var h = $( window ).height();
+    var w = $( window ).width()-100;
+    var h_buff = (h > 200) ? 100 : 0;
+    var w_buff = (w > 200) ? 100 : 0;
+    h -= h_buff;
+    w -= w_buff;
+
+    var spawn_win = function(if_id,if_src){
+      var rand_h = Math.random() * h_buff;
+      var rand_w = Math.random() * w_buff;
+      $('<iframe />', {
+        name: 'wwwww',
+        id:   if_id,
+        src:  if_src,
+        'text-align': 'center'
+      }).appendTo('body');
+      var id_str = '#' + if_id;
+      $(id_str).offset({top: rand_h, left: rand_w});
+      $(id_str).height(10);
+      $(id_str).width(10);
+      var anim_w = w-rand_w;
+      var anim_h = h-rand_h;
+      var anim_d = (Math.random()*3000)+2000;
+      $(id_str).animate({'width':"+="+anim_w,'height':"+="+anim_h},anim_d,function(){
+            $('#'+if_id).remove();
+          });
+    }
+
+    this.run = function(index){
+      if(urls[type][index]){
+        setTimeout(function(){spawn_win("fram"+index,urls[type][index]);}, (Math.random()*2000)+1000);
+        this.run(index+1);
+      }
+    }
+
+  };
+
+</script>
+<body>
+ <div id = "topStuff">
+  <center>
+    <div id="tex1">B<span style="color:white">ADWORDS</span></div>
+    <div id="buttons">
+      <img src="images/02-zuckerberg.png" onclick = 'load_frames("zuck");'></img>
+      <img src="images/01-dog.png" onclick='load_frames("dog");'></img>
+      <img src="images/03-weirdo.png" onclick = 'load_frames("weirdo");'></img>
+    </div>
+    <div id="tex2">
+      INSTRUCTIONS
+    </div>
+    <div id="tex3">
+      1. Clear your cookies.
+        </br>
+      2. Click on a disguise.
+        </br>
+      3. Allow the fake website visits to complete.
+        </br>
+      4. Watch your advertisements change.
+    </div>
+  </center>
+ </div>
+ <div id = "bottomStuff">
+   <div id="tex2">
+    ABOUT
+  </div>
+   <div id="tex4">
+    Many companies make their money by taking your private information, and displaying ads targeted to your supposed interests.
+    </br></br>
+    The information they utilize is largely based on your browsing habits, via cookies. The websites you visit place you in an advertising demographic, and influence the ads you see. For example, if you're in your late twenties, you'll see a lot of ads for engagement rings.
+    </br></br>
+    Savvy users generally fight this defensively-for example, using private browsing features and <a href="https://adblockplus.org">Adblock Plus</a>.
+    </br></br>
+    BADWORDS considers an alternative. It automates a deluge of fake website visits framed around a character that isn't of your own demographic. For now: Mark Zuckerberg, a dog, and a Tea Party weirdo. It obfuscates your real browsing patterns, hiding them behind a disguise. The ads you see will have nothing to do with you, and will also disrupt the lucrative data streams that invasive corporations use to buy and sell you, as if you were a product, and that governments use to spy on you.
+    </br></br>
+    This is only a proof of concept. We welcome others to tweak and improve upon this idea, to hopefully build a more friendly and less corporate internet. 
+    </br></br>
+    This site was built by <a href="http://www.marqod.com">Ryan Walker</a>, <a href="http://www.joeveix.com">Joe Veix</a>, and <a href="http://www.colewillsea.com">Cole Willsea</a>, with illustrations by <a href="http://www.christinalu.com">Christina Lu</a>. We have the code on GitHub here. 
+    </br></br>
+    Any press inquiries can be sent to joeveix@gmail.com.
+   </div>
+ </div>
+</body>
+</html>

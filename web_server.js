@@ -15,12 +15,9 @@ function handler (req, res) {
 	    res.end();
 	    return;
 	  }
-    if (filePath == './')
-        filePath = './badwords.html';
-    if (filePath == './badwords')
-        filePath = './badwords.html';
-    if (filePath == './web_server.js')
-        filePath = './badwords.html';
+    if (filePath == './'){
+      filePath = './badwords.html';
+    }
     console.log(filePath);
     var s = fs.createReadStream(filePath);
     s.on('error', function () {
@@ -29,7 +26,7 @@ function handler (req, res) {
       res.writeHead(404);
       res.end();
     })
-    s.once('fd', function () {res.writeHead(200);});
+    res.setHeader("Cache-Control","public,max-age=9999");
     s.pipe(res);
 }
 

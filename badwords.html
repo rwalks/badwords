@@ -22,37 +22,29 @@
     var frames_per = 100;
     var count = urls[type].length * frames_per;
     var index = 0;
-    var h = $( window ).height();
-    var w = $( window ).width()-100;
-    var h_buff = (h > 200) ? 100 : 0;
-    var w_buff = (w > 200) ? 100 : 0;
-    h -= h_buff;
-    w -= w_buff;
+	var x = 0;
+	var y = 0;
 
-    var spawn_win = function(if_id,if_src){
-      var rand_h = Math.random() * h_buff;
-      var rand_w = Math.random() * w_buff;
-      $('<iframe />', {
-        name: 'wwwww',
-        id:   if_id,
-        src:  if_src,
-        'text-align': 'center'
-      }).appendTo('body');
-      var id_str = '#' + if_id;
-      $(id_str).offset({top: rand_h, left: rand_w});
-      $(id_str).height(10);
-      $(id_str).width(10);
-      var anim_w = w-rand_w;
-      var anim_h = h-rand_h;
-      var anim_d = (Math.random()*3000)+2000;
-      $(id_str).animate({'width':"+="+anim_w,'height':"+="+anim_h},anim_d,function(){
-            $('#'+if_id).remove();
-          });
-    }
+	var spawn_win = function(if_id,if_src){
+		var iframe = document.createElement('IFRAME');
+		iframe.id = if_id;
+		iframe.className = "frame";
+		iframe.src = if_src;
+		iframe.style.left = x + "px";
+		iframe.style.top = y + "px";
+		document.body.appendChild(iframe);
+		iframe.onload = function() {
+		};
+		y += 100;
+		if(y >= document.body.clientWidth) {
+			y = 0;
+		}
+		setTimeout(function(){iframe.parentNode.removeChild(iframe);}, (Math.random() * 10000) + 5000);
+	}
 
     this.run = function(index){
       if(urls[type][index]){
-        setTimeout(function(){spawn_win("fram"+index,urls[type][index]);}, (Math.random()*2000)+1000);
+        setTimeout(function(){spawn_win("fram"+index,urls[type][index]);}, (Math.random()*1000));
         this.run(index+1);
       }
     }
@@ -88,20 +80,9 @@
     ABOUT
   </div>
    <div class="tex4">
-    Many companies make their money by taking your private information, and displaying ads targeted to your supposed interests.
+	Badwords automatically visits a bunch of websites under the guise of a character (Mark Zuckerberg, a Dog, or a Tea Party Weirdo), hiding your actual browsing habits in a sea of "fake" cookies. The targeted ads you see will then match the ad profile of the disguise, instead of you.
     </br></br>
-    The information they utilize is largely based on your browsing habits, via cookies. The websites you visit place you in an advertising demographic, and influence the ads you see. For example, if you're in your late twenties, you'll see a lot of ads for engagement rings.
-    </br></br>
-    Savvy users generally fight this defensively—for example, using private browsing features and <a href="https://adblockplus.org">Adblock Plus</a>.
-    </br></br>
-    BADWORDS considers an alternative. It automates a deluge of fake website visits framed around a character that isn't of your own demographic. For now: Mark Zuckerberg, a dog, and a Tea Party weirdo. It obfuscates your real browsing patterns, hiding them behind a disguise. The ads you see will have nothing to do with you, and will also disrupt the lucrative data streams that invasive corporations use to buy and sell you as if you were a product, and that governments use to spy on you.
-    </br></br>
-    This is only a proof of concept. We welcome others to tweak and improve upon this idea, to hopefully build a more friendly and less corporate internet. 
-   </div>
- </div>
- <div id = "credits">
-   <div class="tex4">
-    BADWORDS was created by <a href="http://www.marqod.com">Ryan Walker</a>, <a href="http://www.joeveix.com">Joe Veix</a>, and <a href="http://www.colewillsea.com">Cole Willsea</a>, with illustrations by <a href="http://www.christinalu.com">Christina Lu</a>. We have the code on GitHub here. 
+	This site was created by <a href="http://www.marqod.com">Ryan Walker</a>, <a href="http://www.joeveix.com">Joe Veix</a>, ahttps://github.com/rwalks/badwordshttps://github.com/rwalks/badwordsnd <a href="http://www.colewillsea.com">Cole Willsea</a>, with illustrations by <a href="http://www.christinalu.com">Christina Lu</a>. We have the code on GitHub <a href="https://github.com/rwalks/badwords">here.</a>
     </br></br>
     Any press inquiries can be sent to joeveix@gmail.com.
    </div>
